@@ -3,36 +3,78 @@
 
 using namespace std;
 
-class Persom {
+class Person {
 private:
     string name;
     int age;
 
 public:
-    Persom() {};
+    Person() {};
 
-    Persom(string name, int age) {
+    Person(string name, int age) {
         this->name = name;
         this->age = age;
     }
 
     void print() {
-        cout << name << " ---:--- " << age << endl;
+        cout << name << " - " << age << endl;
+    }
+
+bool operator<(const Person &other) {
+    return name<other.name;
+    }
+
+};
+
+class People{
+private:
+    int age;
+    string name;
+
+public:
+    People(){};
+    People(int age, string name){
+        this->age = age;
+        this->name = name;
+    }
+
+    void printing() const {
+        cout<< age << " .. " << name<<flush;
+    }
+
+    bool operator<(const People &othPeople) const {
+        return name < othPeople.name;
     }
 
 };
 
 int main() {
-    map<int, Persom> persons;
+    map<int, Person> persons;
+    map<People , int> peoples;
 
-    persons[0] = Persom("SAID", 39);
-    persons[1] = Persom("lahsen", 35);
-    persons[2] = Persom("Hicham", 42);
-    persons[3] = Persom("Mohamed", 46);
+    persons[0] = Person("SAID", 39);
+    persons[1] = Person("Lahsen", 35);
+    persons[2] = Person("Hicham", 42);
+    persons[3] = Person("Mohamed", 46);
 
-    for (map<int, Persom>::iterator it = persons.begin(); it != persons.end(); ++it) {
+    peoples[People(39, "SAID")] = 39;
+    peoples[People(39, "SAID")] = 40;
+    peoples[People(39, "SAID")] = 44;
+    peoples[People(39, "SAID")] = 46;
+
+
+    for (map<int, Person>::iterator it = persons.begin(); it != persons.end(); ++it) {
+//        cout<<it->first<<endl<<":"<<flush;
         it->second.print();
     }
 
+    map<People,int>::iterator itr = peoples.begin();
 
+    for ( ; itr != peoples.end() ; ++itr) {
+
+        itr->first.printing();
+
+//        cout << itr->second << flush;
+
+    }
 }
